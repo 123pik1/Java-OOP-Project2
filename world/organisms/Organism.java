@@ -9,18 +9,18 @@ import world.enumsAndStructs.twoInts;
 public abstract class Organism
 {
 
-    private int strength;
-    private int initiative;
-    private int age;
-    private int x;
-    private int y;
-    private boolean alive;
-    private Color color;
-    private Type type;
-    private Species species;
-    private World world;
+    protected int strength;
+    protected int initiative;
+    protected int age;
+    protected int x;
+    protected int y;
+    protected boolean alive;
+    protected Color color;
+    protected Type type;
+    protected Species species;
+    protected World world;
     // non-heexagonal
-    private twoInts[] directions = { new twoInts(0, 1), new twoInts(1, 0), new twoInts(0, -1), new twoInts(-1, 0),
+    protected twoInts[] directions = { new twoInts(0, 1), new twoInts(1, 0), new twoInts(0, -1), new twoInts(-1, 0),
             new twoInts(1, 1), new twoInts(1, -1), new twoInts(-1, 1), new twoInts(-1, -1) };
 
     public Organism(int strength, int initiative, int x, int y, Color color, Type type, Species species, World world) {
@@ -87,6 +87,12 @@ public abstract class Organism
     {
         return alive;
     }
+    public Species getSpecies()
+    {
+        return species;
+    }
+    public abstract Organism newOrganism(int x, int y);
+    
     public abstract void action();
     public abstract void collision(Organism attacker);
 }

@@ -24,11 +24,31 @@ public abstract class Animal extends Organism
     }
     public void collision(Organism attacker)
     {
+        if (attacker.getSpecies()==this.getSpecies())
+        {
+            reproduce();
+        }
+        else
+        {
+            fight(attacker);
+        }
 
     }
     public void fight(Organism defender)
     {
 
     }
+    private void reproduce()
+    {
+        int dirToReproduce = (int)(Math.random()*8);
+        int counter = 0;
+        while (world.isOccupied(x+directions[dirToReproduce].x, y+directions[dirToReproduce].y) && counter<8)
+        {
+            dirToReproduce = dirToReproduce+1%8;
+            counter++;
+        }
+        world.addOrganism( newOrganism(x+directions[dirToReproduce].x, y+directions[dirToReproduce].y));
+    }
+
     
 }

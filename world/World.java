@@ -8,22 +8,22 @@ import javax.swing.*;
 
 public class World
 {
-   
+
     private int width;
     private int height;
     private int turn;
     private ArrayList<Organism> organisms = new ArrayList<>();
     private boolean hexagonal;
     JFrame window = new JFrame();
+
     public static void main(String[] args)
     {
-        World world = new World(20,20);
-        
+        World world = new World(20, 20);
+
         world.mainloop();
     }
-   
-    public World(int width, int height)
-    {
+
+    public World(int width, int height) {
         this.width = width;
         this.height = height;
         this.turn = 0;
@@ -32,7 +32,6 @@ public class World
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.window.setVisible(true);
     }
-
 
     private void mainloop()
     {
@@ -59,19 +58,22 @@ public class World
         }
         drawWorld();
     }
+
     public void addOrganism(Organism organism)
     {
         organisms.add(organism);
     }
+
     public int getWidth()
     {
         return width;
     }
+
     public int getHeight()
     {
         return height;
     }
-    
+
     public boolean isMovePossible(int x, int y, Organism movingOrganism)
     {
         if (x < 0 || x >= width || y < 0 || y >= height)
@@ -87,10 +89,12 @@ public class World
         }
         return true;
     }
+
     public boolean isHexagonal()
     {
         return hexagonal;
     }
+
     public boolean isOccupied(int x, int y)
     {
         for (Organism organism : organisms)
@@ -102,6 +106,7 @@ public class World
         }
         return false;
     }
+
     private void drawWorld()
     {
 
