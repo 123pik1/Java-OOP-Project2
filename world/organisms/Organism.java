@@ -91,8 +91,8 @@ public abstract class Organism
     {
         return species;
     }
-    public abstract Organism newOrganism(int x, int y);
     
+    public abstract Organism newOrganism(int x, int y); 
     public abstract void action();
     public abstract void collision(Organism attacker);
 }

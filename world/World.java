@@ -14,12 +14,11 @@ public class World
     private int turn;
     private ArrayList<Organism> organisms = new ArrayList<>();
     private boolean hexagonal;
-    JFrame window = new JFrame();
+    private JFrame window = new JFrame();
 
     public static void main(String[] args)
     {
         World world = new World(20, 20);
-
         world.mainloop();
     }
 
@@ -99,7 +98,7 @@ public class World
     {
         for (Organism organism : organisms)
         {
-            if (organism.getX() == x && organism.getY() == y)
+            if (organism.getX() == x && organism.getY() == y && organism.isAlive())
             {
                 return true;
             }
@@ -110,5 +109,24 @@ public class World
     private void drawWorld()
     {
 
+    }
+    public boolean isInBounds(int x, int y)
+    {
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
+    public Organism getOrganism(int x, int y)
+    {
+        for (Organism organism : organisms)
+        {
+            if (organism.getX() == x && organism.getY() == y)
+            {
+                return organism;
+            }
+        }
+        return null;
+    }
+    public JFrame getWindowFrame()
+    {
+        return window;
     }
 }
