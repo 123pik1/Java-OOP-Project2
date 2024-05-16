@@ -3,8 +3,7 @@ package world.organisms;
 import java.awt.Color;
 import world.World;
 import world.enumsAndStructs.Species;
-import world.enumsAndStructs.Type;
-import world.enumsAndStructs.twoInts;
+import world.enumsAndStructs.*;
 
 public abstract class Organism
 {

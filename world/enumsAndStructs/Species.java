@@ -2,7 +2,7 @@ package world.enumsAndStructs;
 
 public enum Species
 {
-    WOLF, SHEEP, FOX, TURTLE, ANTELOPE, GRASS, DANDELION, GUARANA, BELLADONNA, SOSNOWSKY_HOGWEED, HUMAN;
+    WOLF, SHEEP, FOX, TURTLE, ANTELOPE, GRASS, DANDELION, GUARANA, BELLADONNA, SOSNOWSKY_HOGWEED, HUMAN, SONCHUS, NONE;
 
     @Override
     public String toString()
@@ -30,6 +30,8 @@ public enum Species
             return "O";
         case HUMAN:
             return "H";
+        case SONCHUS:
+            return "M";
         default:
             return "";
         }
@@ -60,6 +62,8 @@ public enum Species
             return "SOSNOWSKY_HOGWEED";
         case HUMAN:
             return "HUMAN";
+        case SONCHUS:
+            return "SONCHUS";
         default:
             return "";
         }
