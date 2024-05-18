@@ -65,4 +65,9 @@ public class Human extends Animal
         });
         return dir;
     }
+
+    public void setCooldown(int cooldown)
+    {
+        this.cooldown = cooldown;
+    }
 }
