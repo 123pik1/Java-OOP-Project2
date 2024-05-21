@@ -19,6 +19,7 @@ public abstract class Animal extends Organism
     {
         move();
     }
+
     public twoInts chooseDirection()
     {
         int dir = (int) (Math.random() * 8);
@@ -30,19 +31,17 @@ public abstract class Animal extends Organism
         }
         if (counter == 8)
         {
-            return new twoInts(0,0);
+            return new twoInts(0, 0);
         }
         twoInts mv = directions[dir];
         return mv;
     }
+
     public void move()
     {
-        twoInts dir=chooseDirection();
-        if (dir.x == 0 && dir.y == 0)
-        {
-            return;
-        }
-        if (world.isMovePossible(x +dir.x, y + dir.y, this))
+        twoInts dir = chooseDirection();
+        
+        if (world.isInBounds(x + dir.x, y + dir.y))
         {
             if (world.isOccupied(x + dir.x, y + dir.y))
             {
@@ -50,13 +49,15 @@ public abstract class Animal extends Organism
                 if (collidedOrganism.getType() == Type.ANIMAL)
                 {
                     Animal collidedAnimal = (Animal) collidedOrganism;
-                    if (collidedAnimal.runAway())
-                    {
+                    
+                    if (collidedAnimal.isMoveBlocked(this))
                         return;
-                    }
+                    else if (!collidedAnimal.runAway())
+                        collidedAnimal.collision(this);
                 }
+                else
                 if (collidedOrganism.isAlive())
-                    collision(collidedOrganism);
+                    collidedOrganism.collision(this);
             }
             x += dir.x;
             y += dir.y;
@@ -73,7 +74,6 @@ public abstract class Animal extends Organism
         {
             fight(attacker);
         }
-
     }
 
     public void fight(Organism attacker)
@@ -93,10 +93,11 @@ public abstract class Animal extends Organism
         int counter = 0;
         while (world.isOccupied(x + directions[dirToReproduce].x, y + directions[dirToReproduce].y) && counter < 8)
         {
-            dirToReproduce = dirToReproduce + 1 % 8;
+            dirToReproduce = (dirToReproduce + 1 )% 8;
             counter++;
         }
         world.addOrganism(newOrganism(x + directions[dirToReproduce].x, y + directions[dirToReproduce].y));
+        world.addLog(this.getSpecies().getName() + " reproduced");
     }
 
     public boolean runAway()

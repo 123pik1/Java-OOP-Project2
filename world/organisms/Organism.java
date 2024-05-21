@@ -1,6 +1,12 @@
 package world.organisms;
 
 import java.awt.Color;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import world.World;
 import world.enumsAndStructs.Species;
 import world.enumsAndStructs.*;
@@ -94,4 +100,16 @@ public abstract class Organism
     public abstract Organism newOrganism(int x, int y); 
     public abstract void action();
     public abstract void collision(Organism attacker);
+
+    public void draw(JPanel map)
+    {
+        JLabel jLabel = new JLabel(species.toString());
+        jLabel.setBounds(x * 15+10, y * 15+10, 15, 15);
+        map.add(jLabel);
+    }
+
+    public String getSaveString()
+    {
+        return x + " " + y + " " + strength + " " + age + " " + species.toString();
+    }
 }

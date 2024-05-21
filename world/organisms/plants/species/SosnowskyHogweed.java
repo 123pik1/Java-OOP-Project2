@@ -23,8 +23,10 @@ public class SosnowskyHogweed extends Plant
             int dir = (int) (Math.random() * 8);
             int newX = x + directions[dir].x;
             int newY = y + directions[dir].y;
-            if (world.isInBounds(newX, newY) && world.getOrganism(newX, newY).getType() == Type.ANIMAL)
+            if (world.isInBounds(newX, newY) && world.getOrganism(newX, newY)!=null)
             {
+                if ( world.getOrganism(newX, newY).getType() == Type.ANIMAL)
+                
                 world.getOrganism(newX, newY).die();
             }
         }

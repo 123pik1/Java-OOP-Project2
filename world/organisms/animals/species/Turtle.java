@@ -22,11 +22,15 @@ public class Turtle extends Animal
         if (Math.random() < 0.25)
         {
             super.move();
+            
         }
     }
     public boolean isMoveBlocked(Organism attacker)
     {
+        if(attacker.getStrength() < 5)
+        world.addLog("Turtle blocked");
         return attacker.getStrength() < 5;
+
     }
     
 }

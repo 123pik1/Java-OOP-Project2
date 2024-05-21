@@ -6,29 +6,22 @@ public class Main
 {
     public static void main(String[] args)
     {
-        // Create a JFrame
-        JFrame jFrame = new JFrame();
-        jFrame.setSize(500, 500);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Create a new JFrame
+        JFrame frame = new JFrame();
 
-        // Create a Box
-        Box box = Box.createHorizontalBox();
+        // Create a large panel that won't fit into the layout
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(500, 500));
 
-        // Create a JButton
-        JButton button1 = new JButton("Button 1");
-        box.add(button1);
+        // Create a JScrollPane and add the panel to it
+        JScrollPane scrollPane = new JScrollPane(panel);
 
-        // Add a rigid area (i.e., invisible component) to the Box
-        box.add(Box.createRigidArea(new Dimension(100, 0)));
+        // Add the JScrollPane to the JFrame
+        frame.add(scrollPane);
 
-        // Create another JButton
-        JButton button2 = new JButton("Button 2");
-        box.add(button2);
-
-        // Add the Box to the JFrame
-        jFrame.add(box);
-
-        // Make the JFrame visible
-        jFrame.setVisible(true);
+        // Set the JFrame size, close operation and make it visible
+        frame.setSize(300, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 }
