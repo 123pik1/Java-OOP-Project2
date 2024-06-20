@@ -9,7 +9,7 @@ public class Sonchus extends Plant
 {
     public Sonchus (int x, int y, World world)
     {
-        super(0,  x, y, java.awt.Color.YELLOW, Species.SONCHUS, world);
+        super(0,  x, y, java.awt.Color.RED, Species.SONCHUS, world);
     }
     public Organism newOrganism(int x, int y)
     {

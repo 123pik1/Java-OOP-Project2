@@ -12,7 +12,7 @@ public class Wolf extends Animal
 {
     public Wolf(int x, int y,World world)
     {
-        super(9, 5, x, y,new Color (250,230,222), Species.WOLF, world);
+        super(9, 5, x, y, java.awt.Color.ORANGE, Species.WOLF, world);
     }
     public Organism newOrganism(int x, int y)
     {

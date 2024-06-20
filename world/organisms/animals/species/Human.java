@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.Semaphore;
+
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -20,33 +20,14 @@ import world.organisms.animals.Animal;
 public class Human extends Animal
 {
     private int cooldown;
-    private twoInts dirHum = new twoInts(0, 0);
-    private Semaphore semaphore = new Semaphore(0);
+    private twoInts dirHum = new twoInts(1, 0);
 
     public Human(int x, int y, World world) {
         super(5, 4, x, y, new Color(0, 0, 0), Species.HUMAN, world);
-        // dirHum=new twoInts(0,0);
-        world.getWindowFrame().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                switch (e.getKeyCode()) {
-                case KeyEvent.VK_W:
-                    dirHum = new twoInts(0, -1);
-                    break;
-                case KeyEvent.VK_S:
-                    dirHum = new twoInts(0, 1);
-                    break;
-                case KeyEvent.VK_A:
-                    dirHum = new twoInts(-1, 0);
-                    break;
-                case KeyEvent.VK_D:
-                    dirHum = new twoInts(1, 0);
-                    break;
-                }
-                semaphore.release();
-            }
-        });
+        cooldown = 0;
+
+        
+        
 
     }
 
@@ -77,27 +58,6 @@ public class Human extends Animal
 
     public twoInts chooseDirection()
     {
-        world.getWindowFrame().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                switch (e.getKeyCode()) {
-                case KeyEvent.VK_W:
-                    dirHum = new twoInts(0, -1);
-                    break;
-                case KeyEvent.VK_S:
-                    dirHum = new twoInts(0, 1);
-                    break;
-                case KeyEvent.VK_A:
-                    dirHum = new twoInts(-1, 0);
-                    break;
-                case KeyEvent.VK_D:
-                    dirHum = new twoInts(1, 0);
-                    break;
-                }
-                semaphore.release();
-            }
-        });
         return this.dirHum;
     }
 
@@ -121,22 +81,22 @@ public class Human extends Animal
         return super.getSaveString() + " " + cooldown;
     }
 
-    private void goUP()
+    public void goUP()
     {
         dirHum = new twoInts(0, -1);
     }
 
-    private void goDOWN()
+    public void goDOWN()
     {
         dirHum = new twoInts(0, 1);
     }
 
-    private void goLEFT()
+    public void goLEFT()
     {
         dirHum = new twoInts(-1, 0);
     }
 
-    private void goRIGHT()
+    public void goRIGHT()
     {
         dirHum = new twoInts(1, 0);
     }
@@ -262,5 +222,9 @@ public class Human extends Animal
 
     public void reproduce()
     {
+    }
+    public twoInts getDir()
+    {
+        return dirHum;
     }
 }

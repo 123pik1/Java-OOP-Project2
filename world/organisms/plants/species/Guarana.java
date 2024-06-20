@@ -10,7 +10,7 @@ public class Guarana extends Plant
 {
     public Guarana (int x, int y, World world)
     {
-        super(0,x,y, Color.RED, Species.GUARANA, world);
+        super(0,x,y, java.awt.Color.RED, Species.GUARANA, world);
     }
     public Organism newOrganism(int x, int y)
     {

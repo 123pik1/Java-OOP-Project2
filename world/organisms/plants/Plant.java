@@ -21,6 +21,7 @@ public abstract class Plant extends Organism
             if (world.isInBounds(newX, newY) && world.getOrganism(newX, newY) == null)
             {
                 world.addOrganism(newOrganism(newX, newY));
+                world.addLog(this.species.getName() + "has spreaded");
             }
         }
     }
@@ -29,5 +30,6 @@ public abstract class Plant extends Organism
     public void collision(Organism attacker)
     {
         this.die();
+        world.addLog(attacker.getSpecies() + " ate " + this.getSpecies() );
     }
 }

@@ -8,7 +8,7 @@ import world.organisms.plants.Plant;
 public class Belladonna extends Plant{
     public Belladonna(int x, int y, World world)
     {
-        super(99, x, y, java.awt.Color.MAGENTA, Species.BELLADONNA, world);
+        super(99, x, y, java.awt.Color.RED, Species.BELLADONNA, world);
     }
     public Organism newOrganism(int x, int y)
     {

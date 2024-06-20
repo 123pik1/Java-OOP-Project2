@@ -70,6 +70,10 @@ public abstract class Organism
     {
         return y;
     }
+    public int getInitiative()
+    {
+        return initiative;
+    }
 
     public int getPosition()
     {
@@ -105,6 +109,7 @@ public abstract class Organism
     {
         JLabel jLabel = new JLabel(species.toString());
         jLabel.setBounds(x * 15+10, y * 15+10, 15, 15);
+        jLabel.setForeground(color);
         map.add(jLabel);
     }
 

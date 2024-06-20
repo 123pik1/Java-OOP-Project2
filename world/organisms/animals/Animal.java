@@ -81,9 +81,11 @@ public abstract class Animal extends Organism
         if (attacker.getStrength() > this.strength)
         {
             this.die();
+            world.addLog(attacker.getSpecies().getName() + " killed " + this.getSpecies().getName());
         } else
         {
             attacker.die();
+            world.addLog(this.getSpecies().getName() + " killed " + attacker.getSpecies().getName());
         }
     }
 

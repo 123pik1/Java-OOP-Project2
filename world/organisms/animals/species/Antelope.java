@@ -12,7 +12,7 @@ public class Antelope extends Animal
    private twoInts[] dirs = directions.clone();
     public Antelope(int x, int y, World world)
     {
-        super(4, 4, x, y, new Color(255, 255, 255), Species.ANTELOPE, world);
+        super(4, 4, x, y, java.awt.Color.ORANGE, Species.ANTELOPE, world);
         for (twoInts dir : directions)
         {
             dir.x *= 2;

@@ -11,7 +11,7 @@ public class Turtle extends Animal
 {
     public Turtle(int x, int y, World world)
     {
-        super(2, 1, x, y, new Color(0, 0, 0), Species.TURTLE, world);
+        super(2, 1, x, y, java.awt.Color.ORANGE, Species.TURTLE, world);
     }
     public Organism newOrganism(int x, int y)
     {

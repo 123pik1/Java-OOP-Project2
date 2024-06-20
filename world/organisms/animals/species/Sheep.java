@@ -11,7 +11,7 @@ public class Sheep extends Animal
 {
     public Sheep(int x, int y, World world)
     {
-        super(4, 4, x, y, new Color(255, 255, 255), Species.SHEEP, world);
+        super(8, 4, x, y, java.awt.Color.ORANGE, Species.SHEEP, world);
     }
     public Organism newOrganism(int x, int y)
     {

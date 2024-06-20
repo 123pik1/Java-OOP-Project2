@@ -8,7 +8,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
+import java.awt.event.*;
 
 import world.organisms.Organism;
 import world.organisms.animals.species.*;
@@ -48,20 +52,38 @@ public class World
     }
 
     public World() throws IOException {
-        this.window.setSize(1500, 800);
+        this.window.setSize(1250, 800);
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.window.setVisible(true);
         openWorld();
         drawWorld();
-    }
-
-    private void mainloop()
-    {
-        actTurn();
+        window.requestFocusInWindow();
+        addHumanListener();
     }
 
     private void actTurn()
     {
+        logs.clear();
+        Collections.sort(organisms, new Comparator<Organism>() {
+            @Override
+            public int compare(Organism o1, Organism o2)
+            {
+                if (o1==null || o2==null) return 0;
+                if (o1.getInitiative() != o2.getInitiative())
+                {
+                    if (o1.getInitiative()>o2.getInitiative())
+                    return -1;
+                    else return 1;
+                }
+                if (o1.getAge()==o2.getAge())
+                return 0;
+                else if (o1.getAge()>o2.getAge())
+                return -1;
+                else return 1;
+            }
+        });
+        // JComponent w = (JComponent) window.getContentPane();
+        addHumanListener();
         int nmbOfOrganisms = organisms.size();
         for (int i = 0; i < nmbOfOrganisms; i++)
         {
@@ -272,8 +294,10 @@ public class World
     private void drawMap()
     {
         JPanel map = new JPanel();
-        map.setPreferredSize(new Dimension(500,500));
-        map.setBounds(10, 10, 500, 500);
+        // JComponent m = (JComponent) map;
+        // addHumanListener(m);
+        map.setPreferredSize(new Dimension(1200, 500));
+        map.setBounds(10, 10, 1200, 500);
         map.setLayout(null);
         for (int y = 0; y < height; y++)
         {
@@ -432,10 +456,12 @@ public class World
     private void drawMenu()
     {
         JInternalFrame menuBar = new JInternalFrame();
+        // JComponent m = (JComponent) menuBar;
+        // addHumanListener(m);
         menuBar.setLayout(null);
         menuBar.setResizable(true);
         menuBar.setClosable(false);
-        menuBar.setBounds(0, 520, 250, 200);
+        menuBar.setBounds(20, 520, 250, 200);
 
         JButton nextTurnButton = new JButton("Next turn");
         JButton saveButton = new JButton("Save");
@@ -499,5 +525,53 @@ public class World
     public void addLog(String log)
     {
         logs.add(log);
+    }
+
+    private void addHumanListener()
+    {
+        Organism human = findHuman();
+        if (human == null)
+            return;
+        Human hm = (Human) human;
+
+        Action goUp = new AbstractAction() {
+            public void actionPerformed(ActionEvent e)
+            {
+                hm.goUP();
+            }
+        };
+        Action goDown = new AbstractAction() {
+            public void actionPerformed(ActionEvent e)
+            {
+                hm.goDOWN();
+            }
+        };
+        Action goLeft = new AbstractAction() {
+            public void actionPerformed(ActionEvent e)
+            {
+                hm.goLEFT();
+            }
+        };
+        Action goRight = new AbstractAction() {
+            public void actionPerformed(ActionEvent e)
+            {
+                hm.goRIGHT();
+            }
+        };
+
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "goUp");
+        window.getRootPane().getActionMap().put("goUp", goUp);
+
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"),
+                "goDown");
+        window.getRootPane().getActionMap().put("goDown", goDown);
+
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"),
+                "goLeft");
+        window.getRootPane().getActionMap().put("goLeft", goLeft);
+
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"),
+                "goRight");
+        window.getRootPane().getActionMap().put("goRight", goRight);
     }
 }

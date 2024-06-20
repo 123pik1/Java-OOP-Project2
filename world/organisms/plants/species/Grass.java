@@ -8,7 +8,7 @@ public class Grass extends Plant
 {
     public Grass (int x, int y, World world)
     {
-        super(0,  x, y, java.awt.Color.GREEN, Species.GRASS, world);
+        super(0,  x, y, java.awt.Color.RED, Species.GRASS, world);
     }
     public Organism newOrganism(int x, int y)
     {
